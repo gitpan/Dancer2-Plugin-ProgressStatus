@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST
+META.yml
+Makefile.PL
+README
+README.md
+example/bin/app.pl
+example/config.yml
+example/lib/Progress.pm
+example/public/client_progress.js
+lib/Dancer2/Plugin/ProgressStatus.pm
+lib/Dancer2/Plugin/ProgressStatus/Object.pm
+t/config.yml
+t/test-progress.t
