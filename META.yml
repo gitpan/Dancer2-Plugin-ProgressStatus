@@ -24,4 +24,4 @@ requires:
 resources:
   bugtracker: https://github.com/shumphrey/Dancer2-Plugin-ProgressStatus/issues
   repository: https://github.com/shumphrey/Dancer2-Plugin-ProgressStatus
-version: 0.012
+version: 0.013

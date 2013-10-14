@@ -23,7 +23,7 @@ Steven Humphrey
 
 package Dancer2::Plugin::ProgressStatus::Object;
 {
-  $Dancer2::Plugin::ProgressStatus::Object::VERSION = '0.012';
+  $Dancer2::Plugin::ProgressStatus::Object::VERSION = '0.013';
 }
 
 use strict;
@@ -62,6 +62,16 @@ has _on_save => (
     isa      => sub { die 'needs _on_save coderef' unless ref($_[0]) eq 'CODE' },
 );
 
+has start_time => (
+    is   => 'rw',
+    default => sub { time(); }
+);
+
+has current_time => (
+    is   => 'rw',
+    default => sub { time(); }
+);
+
 after [qw/status count/] => sub {
     if ( $_[1] ) {
         $_[0]->save();
@@ -83,7 +93,7 @@ will automatically call save.
 =cut
 sub save {
     my ( $self, $is_finished ) = @_;
-
+    $self->current_time(time());
     $self->_on_save->($self, $is_finished);
 }
 
