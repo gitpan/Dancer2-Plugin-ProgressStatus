@@ -1,31 +1,6 @@
-=head1 NAME
-
-Dancer2::Plugin::ProgressStatus::Object
-
-=head1 DESCRIPTION
-
-An object that represents a progress status.
-
-=head1 SYNOPSIS
-
-  $progress++;
-  $progress->add_message('everything is going swimmingly');
-
-=head1 AUTHOR
-
-Steven Humphrey
-
-=head1 METHODS
-
-=over
-
-=cut
 
 package Dancer2::Plugin::ProgressStatus::Object;
-{
-  $Dancer2::Plugin::ProgressStatus::Object::VERSION = '0.014';
-}
-
+$Dancer2::Plugin::ProgressStatus::Object::VERSION = '0.015';
 use strict;
 use warnings;
 
@@ -84,30 +59,12 @@ sub finish {
     $self->save(1);
 }
 
-=item save
-
-You shouldn't need to call this.
-Any use of increment, decrement, ++, --, add_message, status, count, etc
-will automatically call save.
-
-=cut
 sub save {
     my ( $self, $is_finished ) = @_;
     $self->current_time(time());
     $self->_on_save->($self, $is_finished);
 }
 
-=item increment
-
-Adds a specified amount to the count (defaults to 1)
-
-  $prog->increment(10);
-
-Can also add messages at the same time
-
-  $prog->increment(10, 'updating count by 10');
-
-=cut
 sub increment {
     my ( $self, $increment, @messages ) = @_;
 
@@ -119,17 +76,6 @@ sub increment {
     $self->save();
 }
 
-=item decrement
-
-Decrement a specified amount from the count (defaults to 1)
-
-  $prog->decrement(10);
-
-Can also add messages at the same time
-
-  $prog->decrement(10, 'reducing count by 10');
-
-=cut
 sub decrement {
     my ( $self, $increment, @messages ) = @_;
     $increment ||= 1;
@@ -140,13 +86,6 @@ sub decrement {
     $self->save();
 }
 
-=item add_message
-
-Adds one or more string messages to the status data.
-
-  $prog->add_message('a simple message');
-
-=cut
 sub add_message {
     my ( $self, @messages ) = @_;
 
@@ -160,9 +99,79 @@ sub DESTROY {
 
 no Moo;
 
-=back
-
-=cut
 
 1;
 
+__END__
+
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+Dancer2::Plugin::ProgressStatus::Object
+
+=head1 VERSION
+
+version 0.015
+
+=head1 SYNOPSIS
+
+  $progress++;
+  $progress->add_message('everything is going swimmingly');
+
+=head1 DESCRIPTION
+
+An object that represents a progress status.
+
+=head1 METHODS
+
+=over
+
+=item save
+
+You shouldn't need to call this.
+Any use of increment, decrement, ++, --, add_message, status, count, etc
+will automatically call save.
+
+=item increment
+
+Adds a specified amount to the count (defaults to 1)
+
+  $prog->increment(10);
+
+Can also add messages at the same time
+
+  $prog->increment(10, 'updating count by 10');
+
+=item decrement
+
+Decrement a specified amount from the count (defaults to 1)
+
+  $prog->decrement(10);
+
+Can also add messages at the same time
+
+  $prog->decrement(10, 'reducing count by 10');
+
+=item add_message
+
+Adds one or more string messages to the status data.
+
+  $prog->add_message('a simple message');
+
+=back
+
+=head1 AUTHOR
+
+Steven Humphrey
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2014 by Steven Humphrey.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
